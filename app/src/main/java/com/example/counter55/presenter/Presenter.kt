@@ -1,5 +1,6 @@
 package com.example.counter55.presenter
 
+import android.graphics.Color
 import com.example.counter55.setting.Injector
 import com.example.counter55.ui.CounterView
 
@@ -11,14 +12,25 @@ class Presenter {
     fun increment (){
         model.increment()
         view.updateText(model.count)
+
+    if (model.count == 10) {
+        view.showToast("Congratulations!")
     }
 
-    fun init(view: CounterView) {
-        this.view = view
+    if (model.count == 15) {
+        view.changeTextColor(Color.GREEN)
+    } else {
+        view.resetTextColor()
     }
+}
 
-    fun decrement (){
-        model.decrement()
-        view.updateText(model.count)
-    }
+fun decrement(){
+    model.decrement()
+    view.updateText(model.count)
+    view.resetTextColor()
+}
+
+fun initView(view: CounterView){
+    this.view = view
+}
 }
